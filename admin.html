@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <style>
+        body{font-family:Arial;margin:20px;background:#111;color:#0f0;}
+        .client{background:#222;padding:15px;margin:10px;border-radius:8px;}
+        button{padding:8px 15px;margin:5px;border:none;border-radius:5px;}
+        .active{background:#0a0;} .suspended{background:#a00;}
+    </style>
+</head>
+<body>
+    <h1>🔧 Phishing SaaS Admin</h1>
+    
+    <div id="stats">
+        <p>👥 Clients: <span id="clientCount">0</span></p>
+        <p>💰 Revenue: $<span id="revenue">0</span>/month</p>
+    </div>
+    
+    <h2>📋 Client List</h2>
+    <div id="clientList"></div>
+    
+    <button onclick="addClient()">➕ Add Client</button>
+    
+    <script>
+    // SIMPLE CLIENT MANAGEMENT
+    let clients = JSON.parse(localStorage.getItem('clients') || '[]');
+    
+    function updateDisplay() {
+        document.getElementById('clientCount').textContent = clients.length;
+        document.getElementById('revenue').textContent = clients.length * 30;
+        
+        let html = '';
+        clients.forEach((client, i) => {
+            html += `<div class="client ${client.status}">
+                <strong>${client.id}</strong> | ${client.plan} | $${client.price}/month
+                <button onclick="toggleStatus(${i})">${client.status}</button>
+                <button onclick="deleteClient(${i})">🗑️</button>
+            </div>`;
+        });
+        document.getElementById('clientList').innerHTML = html;
+        localStorage.setItem('clients', JSON.stringify(clients));
+    }
+    
+    function addClient() {
+        const id = prompt("Client ID:");
+        if (id) {
+            clients.push({
+                id: id,
+                plan: 'basic',
+                price: 30,
+                status: 'active',
+                created: new Date().toISOString()
+            });
+            updateDisplay();
+        }
+    }
+    
+    updateDisplay();
+    </script>
+</body>
+</html>
